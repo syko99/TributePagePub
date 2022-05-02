@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="narutoTributePage" content="width=device-width, initial-scale=1.0">
+    <title>Naruto Tribute</title>
+    <style>
+        :root{
+            --main-font: "century gothic";
+            --main-orange:rgba(255, 123, 0, 0.75);
+        }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+
+        /* scrollbar */
+
+        ::-webkit-scrollbar{
+            width: 10px;
+            background: rgb(30,30,30);
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color: var(--main-orange);
+        }
+
+        /* Nav bar */        
+
+        .nav-bar{
+            background-color: rgb(30,30,30);
+            position: fixed;
+            width: 100%;
+            display: flex;
+            list-style: none;
+            height: 3rem;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            z-index: 1;
+            font-family: var(--main-font);
+            border-bottom: .1rem solid var(--main-orange);
+        }
+        .nav-bar--link a{
+            padding: .43rem;
+            color: white;
+            text-decoration: none;
+            position: relative;
+            letter-spacing: .1em;
+        }
+        .nav-bar--link a::after{
+            content: "";
+            background-color: var(--main-orange);
+            position: absolute;
+            width: 100%;
+            transform: scale(0);
+            height: .2em;
+            left: 0;
+            bottom: .2rem;
+            transition: all 100ms ease 0s;
+        }
+        .nav-bar--link a:hover::after{
+            transform: scale(1);
+        }
+
+        /* Background Images */
+
+        .bg-img{
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            display: grid;
+            place-items: center;
+        }
+        .bg-img1{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("NarutoTributePagepics/Bg-img1.jpg");
+            height: 100vh;
+            background-position: bottom;
+        }
+        .bg-img2{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("NarutoTributePagepics/bg-img01.jpg");
+            height: 80vh;
+        }
+        .bg-img3{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("NarutoTributePagepics/Bg-img3.jpg");
+            height: 80vh;
+            background-position: top;
+        }
+        .bg-img4{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("NarutoTributePagepics/Bg-img4.jpg");
+            height: 80vh;
+            background-position: top;
+        }
+        .bg-img5{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("NarutoTributePagepics/Bg-imglast.jpg");
+            height: 80vh;
+            background-position: top;
+        }
+        .bg-img--text{
+            background-color: rgba(255, 123, 0, 0.75);
+            padding: 1em;
+            font-family: var(--main-font);
+            font-size: 2rem;
+            color: rgb(255, 255, 255);
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
+            margin: 1rem;
+        }
+        .bg-img--text a{
+            text-decoration: none;
+            color: white;
+        }
+
+        /* History Panels */
+        
+        .history-panel{
+            background-color: rgb(30,30,30,0.99);
+            color: rgb(220,220,220);
+            font-family: var(--main-font);
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas: 
+            "topic img"
+            "text img";
+        }
+        .history-panel h2{
+            padding-top: 1rem;
+            padding-left: 15%;
+            font-size: 2rem;
+            grid-area: topic;
+            text-decoration: underline;
+            text-decoration-thickness: .2rem;
+            text-decoration-color: var(--main-orange);
+            text-underline-offset: .2rem;
+        }
+        .history-panel p{
+            width: clamp(45ch, 60%, 85ch);
+            padding: 1rem;
+            padding-left: 10%;
+            grid-area: text;
+            text-indent: 2rem;
+        }
+        .history-panel-next{
+            background-color: rgb(30,30,30);
+            color: rgb(220,220,220);
+            font-family: var(--main-font);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: auto auto;
+            grid-template-areas: 
+            "img topic"
+            "img text";
+        }
+        
+        .history-panel-next h2{
+            padding-top: 1rem;
+            margin-left: auto;
+            padding-right: 15%;
+            font-size: 2rem;
+            grid-area: topic;
+            text-decoration: underline;
+            text-decoration-thickness: .2rem;
+            text-decoration-color: var(--main-orange);
+            text-underline-offset: .2rem;
+        }
+        .history-panel-next p{
+            width: clamp(45ch, 60%, 85ch);
+            padding: 1rem;
+            padding-right: 10%;
+            margin-left: auto;
+            grid-area: text;
+            text-indent: 2rem;
+        }
+
+        #footer{
+            display: grid;
+            place-items: center;
+            background-color: rgb(30,30,30);
+            color: white;
+            font-family: var(--main-font);
+            padding: 1rem;
+        }
+        /* Media Queries */
+
+        @media screen and (max-width: 800px){
+            .history-panel{
+                background-color: rgb(30,30,30,0.99);
+                color: rgb(220,220,220);
+                font-family: var(--main-font);
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                grid-template-areas: 
+                "topic"
+                "img"
+                "text";
+            }
+            .history-panel-next{
+                background-color: rgb(30,30,30);
+                color: rgb(220,220,220);
+                font-family: var(--main-font);
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                grid-template-areas: 
+                "topic"
+                "img"
+                "text";
+            }
+            .history-panel-next h2{
+            padding-top: 1rem;
+            margin-left: 10%;
+            padding-right: 15%;
+            font-size: 2rem;
+            grid-area: topic;
+        }
+            .history-panel-next p{
+            width: clamp(45ch, 60%, 85ch);
+            padding: 1rem;
+            padding-right: 0;
+            padding-left: 10%;
+            margin-left: 0;
+            grid-area: text;
+            text-indent: 2rem;
+            }
+        .history-panel h2{
+            padding-top: 1rem;
+            padding-left: 10%;
+            font-size: 2rem;
+            grid-area: topic;
+        }
+        .history-panel p{
+            width: clamp(45ch, 60%, 85ch);
+            padding: 1rem;
+            padding-left: 10%;
+            grid-area: text;
+            text-indent: 2rem;
+        }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <li class="nav-bar--link"><a href="#jump1">Childhood</a></li>
+                <li class="nav-bar--link"><a href="#jump2">Teenage</a></li>
+                <li class="nav-bar--link"><a href="#jump3">Adulthood</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="bg-img bg-img1">
+        <div class="bg-img--text">A Tribute to Naruto Uzumaki</div>
+    </div>
+    <section id="jump1" class="history-panel history-panel1">
+        <h2>Naruto Uzumaki</h2>
+        <p>A brief history of the 7<sup>th</sup> Hokage, from troubled youth to leader of a nation.</p>
+    </section>
+    <div class="bg-img bg-img2">
+        <div class="bg-img--text">A New Era</div>
+    </div>
+    <section class="history-panel history-panel2">
+        <h2>Birth of a Jinchuriki</h2>
+        <p>Naruto was born a Jinchuriki of the Nine-Tailed Fox. His parents, Minato Namikaze (fourth Hokage) and 
+            Kushina Uzumaki both died soon after his birth, saving him from being killed by the Nine-Tailed beast.</p>
+    </section>
+    <section class="history-panel-next history-panel2">
+        <h2>Infancy</h2>
+        <p>With no one to look after young Naruto, the third Hokage swore to look after the baby boy. However, this wasn't really the case.
+             Baby naruto housed in Lord Third's home as an infant but was cared for by a nanny in a private room. He received little attention 
+             and was kept secluded from most of the outside world.</p>
+    </section>
+    <section class="history-panel history-panel1">
+        <h2>Early Childhood</h2>
+        <p>By the time naruto was a young child, he was left to live on his own in a small apartment. 
+            He lived alone in this apartment his entire childhood, eating mostly ramen noodles. The third Hokage would drop off some money every 
+            month for the boy to make ends meet. He was giving Naruto a way to survive, but was not truly raising or 
+        taking care of him. He only recieved the welfare checks because of the third Hokage's word to take care of the fourth Hokage's son. Almost no one
+        else in his village knew of his bloodline, Naruto himself didn't even know. Being the Nine-Tails Jinchuriki, he always kept to 
+        himself as he was looked down upon by everyone in the village as a monster child. Naruto was alone as a child.</p>
+    </section>
+    <section class="history-panel-next history-panel2">
+        <h2>Late Childhood</h2>
+        <p>Naruto was a pretty reckless child. He was almost living in his own world, doing whatever he pleased like running 
+            throughout the village pulling pranks and bothering people. He was becoming infamous as a reckless kid, but deep down it was because he just wanted some kind of attention. 
+        He did attend school which was called academy. During academy he was the same reckless kid, but he constantly tried to make friends and prove hisself by being very outgoing. 
+        Fortunately, he was becoming pretty successful at connecting with others at his age, making friends in the academy mainly because of his inspiring motivation to keep improving
+        despite his circumstances as a child..</p>
+    </section>
+    <div id="jump2" class="bg-img bg-img3">
+        <div class="bg-img--text">Adolescence</div>
+    </div>
+    <section class="history-panel history-panel3">
+        <h2>Gone Training</h2>
+        <p>After graduating at the academy, young shinobi were to begin taking on missions to serve the village and provide a means of living. As Naruto 
+            completed his missions, he had been making friends and building relationships all over many nations. He was also becoming a pretty powerful shinobi. Naruto's strengths began
+        to develop as he got older, getting a grasp of his powers inherited from his parents. He began very intense training to become stronger and he had the ability to do so thanks to
+        his strong dna. He was strong enough to save his entire village from destruction and had been deemed a hero. The power of the Nine-Tailed Fox was something that he had 
+        little control of and mostly revealed itself through anger, boosting his own power but hurting himself in many ways. So naturally he hated it and tried his best to keep it under wraps.</p>
+    </section>
+    <section class="history-panel-next history-panel3">
+        <h2>Fitting In</h2>
+        <p>Naruto was a pretty reckless child. He was almost living in his own world, doing whatever he pleased like running 
+            throughout the village pulling pranks and bothering people. He was becoming infamous as a reckless kid, but deep down it was because he just wanted some kind of attention. 
+        He did attend school which was called academy. During academy he was the same reckless kid, but he constantly tried to make friends and prove hisself by being very outgoing. 
+        Fortunately, he was becoming pretty successful at connecting with others at his age, making friends in the academy mainly because of his inspiring motivation to keep improving
+        despite his circumstances as a child..</p>
+    </section>
+    <section class="history-panel history-panel3">
+        <h2>To be a Sage</h2>
+        <p>After graduating at the academy, young shinobi were to begin taking on missions to serve the village and provide a means of living. As Naruto 
+            completed his missions, he had been making friends and building relationships all over many nations. He was also becoming a pretty powerful shinobi. Naruto's strengths began
+        to develop as he got older, getting a grasp of his powers inherited from his parents. He began very intense training to become stronger and he had the ability to do so thanks to
+        his strong dna. He was strong enough to save his entire village from destruction and had been deemed a hero. The power of the Nine-Tailed Fox was something that he had 
+        little control of and mostly revealed itself through anger, boosting his own power but hurting himself in many ways. So naturally he hated it and tried his best to keep it under wraps.</p>
+    </section>
+    <section class="history-panel-next history-panel3">
+        <h2>Hero Status</h2>
+        <p>Naruto was a pretty reckless child. He was almost living in his own world, doing whatever he pleased like running 
+            throughout the village pulling pranks and bothering people. He was becoming infamous as a reckless kid, but deep down it was because he just wanted some kind of attention. 
+        He did attend school which was called academy. During academy he was the same reckless kid, but he constantly tried to make friends and prove hisself by being very outgoing. 
+        Fortunately, he was becoming pretty successful at connecting with others at his age, making friends in the academy mainly because of his inspiring motivation to keep improving
+        despite his circumstances as a child..</p>
+    </section>
+    <div id="jump3" class="bg-img bg-img4">
+        <div class="bg-img--text">All Grown Up</div>
+    </div>
+    <section class="history-panel history-panel4">
+        <h2>Fourth Great War</h2>
+        <p>Naruto had became friends with many people over his years growing up. He had also become one of the most powerful young shinobi in his time.
+            He became very strong through his experience in battling in the fourth great ninja war. Naruto was one of the few shinobi who saved everyone's lives during the war. A few years 
+            after surviving the war, he was married with two children. Nearly a decade after the fourth great war, he was finally Hokage. Becoming Hokage was his childhood dream and very far fetched
+            for a child in the position he was back then. As the Seventh Hokage of his village, he had also become one of if not the most powerful shinobi in the world.</p>
+    </section>
+    <section class="history-panel-next history-panel4">
+        <h2>Recognition</h2>
+        <p>Naruto was a pretty reckless child. He was almost living in his own world, doing whatever he pleased like running 
+            throughout the village pulling pranks and bothering people. He was becoming infamous as a reckless kid, but deep down it was because he just wanted some kind of attention. 
+        He did attend school which was called academy. During academy he was the same reckless kid, but he constantly tried to make friends and prove hisself by being very outgoing. 
+        Fortunately, he was becoming pretty successful at connecting with others at his age, making friends in the academy mainly because of his inspiring motivation to keep improving
+        despite his circumstances as a child..</p>
+    </section>
+    <section class="history-panel history-panel4">
+        <h2>Becoming a Leader</h2>
+        <p>Naruto had became friends with many people over his years growing up. He had also become one of the most powerful young shinobi in his time.
+            He became very strong through his experience in battling in the fourth great ninja war. Naruto was one of the few shinobi who saved everyone's lives during the war. A few years 
+            after surviving the war, he was married with two children. Nearly a decade after the fourth great war, he was finally Hokage. Becoming Hokage was his childhood dream and very far fetched
+            for a child in the position he was back then. As the Seventh Hokage of his village, he had also become one of if not the most powerful shinobi in the world.</p>
+    </section>
+    <section class="history-panel-next history-panel4">
+        <h2>Dreams to Reality</h2>
+        <p>Naruto was a pretty reckless child. He was almost living in his own world, doing whatever he pleased like running 
+            throughout the village pulling pranks and bothering people. He was becoming infamous as a reckless kid, but deep down it was because he just wanted some kind of attention. 
+        He did attend school which was called academy. During academy he was the same reckless kid, but he constantly tried to make friends and prove hisself by being very outgoing. 
+        Fortunately, he was becoming pretty successful at connecting with others at his age, making friends in the academy mainly because of his inspiring motivation to keep improving
+        despite his circumstances as a child..</p>
+    </section>
+    <div class="bg-img bg-img5">
+        <div class="bg-img--text"><a href="https://naruto.fandom.com/wiki/Naruto_Uzumaki" target="_blank">Naruto Wikipedia</a></div>
+    </div>
+    <section id="footer">
+        <p>created by Sykong Yang</p>
+    </section>
+</body>
+</html>
